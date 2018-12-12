@@ -73,7 +73,7 @@ public class SimpleRobot {
 	public void move(double energy) {
 		// We overshoot by a random amount related to the distance squared
 		double overshoot = randomGenerator.nextDouble() * energy * energy / 10.0;
-		energy += overshoot;
+		double distance = energy + overshoot;
 		double distanceToObstacle = 0;
 		String nameOfObstacle = "something";
 		
