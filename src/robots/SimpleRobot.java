@@ -63,18 +63,17 @@ public class SimpleRobot {
 	}
 
 	/**
-	 * Move the robot.
+	 * Move the robot with a certain amount of energy.
 	 * <p>
-	 * Warning -- the robot's brakes don't work very well.  It doesn't stop immediately at the end
-	 * of the movement.  Instead, it coastsa little beyond the distance you tell it to go.  The faster
-	 * it goes, the more it will coast.  (The robot foes faster when it has to travel longer distances).
+	 * The robot doesn't have any brakes, so moving with more energy will make the robot coast
+	 * further.
 	 * 
-	 * @param distance Distance the robot should move in the direction it is facing.
+	 * @param energy -  Energy to be used to move the robot should move in the direction it is facing.
 	 */
-	public void Move(double distance) {
+	public void move(double energy) {
 		// We overshoot by a random amount related to the distance squared
-		double overshoot = randomGenerator.nextDouble() * distance * distance / 10.0;
-		distance += overshoot;
+		double overshoot = randomGenerator.nextDouble() * energy * energy / 10.0;
+		energy += overshoot;
 		double distanceToObstacle = 0;
 		String nameOfObstacle = "something";
 		
@@ -205,7 +204,7 @@ public class SimpleRobot {
 	 * @return estimate of the distance between the robot and the wall it is facing.
 	 */
 	public double readDistanceSensor() {
-		double noise = randomGenerator.nextGaussian();
+		double noise = 2.0 * randomGenerator.nextGaussian();
 		switch (direction) {
 		case NORTH: return position.y + noise;
 		case SOUTH: return ns_length - position.y + noise;
